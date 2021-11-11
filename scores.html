@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Play BWC</title>
+    <link href="assets/style/style.css" rel="stylesheet" type="text/css">
+    <link href="assets/style/scoreStyle.css" rel="stylesheet" type="text/css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet"> 
+</head>
+<body>
+    <div id="scoreWrapper">
+        <div id="scoreHeader">
+            <h1>KNScore</h1>
+            <div id="scoreButtonsBox">
+                <div class="scoreButton scoreModifier" id="scoreModifier1">
+                    <input type="number" class="numeric" id="scoreModVal1" value="-150"></input>
+                </div>
+                <div class="scoreButton scoreModifier" id="scoreModifier2">
+                    <input type="number" class="numeric" id="scoreModVal2" value="-50"></input>
+                </div>
+                <div class="scoreButton scoreModifier" id="scoreModifier3">
+                    <input type="number" class="numeric" id="scoreModVal3" value="50"></input>
+                </div>
+                <div class="scoreButton scoreModifier" id="scoreModifier4">
+                    <input type="number" class="numeric" id="scoreModVal4" value="150"></input>
+                </div>
+            </div>
+        </div>
+        <div id="scoresBox">
+            <span>
+                <h1>Standings</h1>
+                <div id="newPlayerButton" class="unselectable">+</div>
+            </span>
+            <div id="scores">
+                <!--
+                <div class="player">
+                    <input type="text" class="playerName" value="name"></input>
+                    <div class="playerFlag">PLAYER</div>
+                    <div class="aliveFlag">ALIVE</div>
+                    <div class="updateScoreButton updateScoreButton1">-100</div>
+                    <div class="updateScoreButton updateScoreButton2">+100</div>
+                    <div class="updateScoreButton updateScoreButton3">-100</div>
+                    <div class="updateScoreButton updateScoreButton4">+100</div>
+                    <input type="number" class="playerScore numeric" value="0"></input>
+                </div>
+                -->
+
+            </div>
+        </div>
+        <div id="scoreFooter">
+            <h1>RIP KScore</h1>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="assets/js/skModels.js"></script>
+    <script src="assets/js/skView.js"></script>
+    <script src="assets/js/skListeners.js"></script>
+    <script src="assets/js/skApp.js"></script>
+
+
+</body>
+</html>

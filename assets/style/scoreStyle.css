@@ -1,0 +1,311 @@
+#scoreWrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas: 
+        "header"
+        "scoresBox"
+        "footer";
+}
+
+div {
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
+#scoreHeader, #scoreFooter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(230, 230, 230);
+    box-shadow: 0 0 3px gray;
+}
+
+#scoreHeader {
+    grid-area: header;
+
+}
+
+#scoreHeader h1 {
+    margin: 9px 0;
+}
+#scoreHeader h1, #scoreFooter h1 {
+    font-size: 21px;
+}
+
+
+#scoreFooter {
+    grid-area: footer;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+#scoreButtonsBox, #scoresBox {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+#scoreButtonsBox {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0;
+}
+
+.scoreButton, input {
+    font-size: 18px;
+    width: 100%;
+}
+
+.scoreButton {
+    display: flex;
+    align-items: center;
+    background-color: rgb(248, 248, 248);
+    margin: 0 9px 18px 9px;
+    border-radius: 1vh;
+    text-align: center;
+    width: 100px;
+    height: max(50px, 65%);
+}
+
+.scoreButton input[type="number"] {
+}
+
+.scoreModifier {
+    padding: max(2px, 2vh);
+    cursor: default
+}
+
+input {
+    background: none;
+    border: none;
+    border-bottom: 2px solid black;
+    font-family: "Open Sans", sans-serif;
+}
+
+.scoreModifier input {
+    width: 90%;
+    text-align: center;
+    margin: 0;
+}
+
+#scoresBox {
+    grid-area: scoresBox;
+    flex-direction: column;
+    display: flex;
+    padding: 0 8%;
+}
+
+#scores {
+    flex-direction: column;
+    align-items: center;
+}
+
+#scoresBox h1 {
+    display: inline-block;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+#scoresBox span {
+    margin: 25px 0;
+}
+
+#newPlayerButton {
+    content: "+";
+    height: 25px;
+    width: 25px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid black;
+    background-color: black;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0 0 0 10px;
+    position: relative;
+    bottom: 2px;
+}
+
+#newPlayerButton:hover {
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
+
+#newPlayerButton:active {
+    background-color: gray;
+}
+
+*.unselectable {
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+ 
+    /*
+      Introduced in IE 10.
+      See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+    */
+    -ms-user-select: none;
+    user-select: none;
+ }
+
+.player {
+    transition: top 2s;
+    display: grid;
+    grid-template-columns: auto 1fr 1fr 4fr 0.75fr 0.75fr 0.75fr 0.75fr auto;
+    grid-template-rows: 1fr;
+    grid-template-areas:
+        "name aliveFlag playerFlag . updateScoreBtn1 updateScoreBtn2 updateScoreBtn3 updateScoreBtn4 score";
+    grid-column-gap: 2vw;
+    padding: 5px 20px;
+    width: 100%;
+    min-width: 600px;
+    background-color:rgb(230, 230, 230);
+    height: 70px;
+    margin-bottom: 15px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+}
+
+@media only screen and (max-width: 1000px){
+    .player {
+        grid-template-columns: auto 1fr 1fr 0fr 0.75fr 0.75fr 0.75fr 0.75fr auto;
+    }
+}
+
+
+.playerName {
+    grid-area: name;
+    font-weight: bold;
+    font-size: 21px;
+    max-width: 200px;
+}
+
+.aliveFlag {
+    grid-area: aliveFlag;
+}
+
+.playerFlag {
+    grid-area: playerFlag;
+}
+
+.aliveFlag, .playerFlag {
+    font-size: 12px;
+    min-width: 50px;
+}
+
+.aliveFlag, .playerFlag, .addMinionButton, .updateScoreButton {
+    background-color:rgb(248, 248, 248);
+    padding: 5px;
+    border-radius: 5px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dead {
+    /*background-color: rgb(109, 59, 59);*/
+    background-color: rgb(101, 82, 112);
+    color: white;
+}
+
+.npc {
+    background-color: rgb(133, 126, 117);
+    color: white;
+}
+
+.updateScoreButton {
+    min-width: 50px;
+    overflow: hidden;
+}
+
+.addMinionButton {
+    grid-area: addMinionBtn;
+}
+
+.updateScoreButton1 {
+    grid-area: updateScoreBtn1;
+}
+
+.updateScoreButton2 {
+    grid-area: updateScoreBtn2;
+}
+
+.updateScoreButton3 {
+    grid-area: updateScoreBtn3;
+}
+
+.updateScoreButton4 {
+    grid-area: updateScoreBtn4;
+}
+
+.addMinionButton, .updateScoreButton {
+    height: 50px;
+}
+
+.addMinionButton:hover, .updateScoreButton:hover {
+    background-color: lightgray;
+}
+
+.player div:hover {
+    cursor: pointer;
+}
+
+.playerScore {
+    grid-area: score;
+    text-align: right;
+    font-weight: bold;
+    font-size: 21px;
+    max-width: 72px;
+    justify-self: right;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+@media only screen and (max-device-width: 767px){
+    #scoreWrapper {
+        
+        grid-template-rows: 12vh,75px 88vh;
+    }
+
+    .scoreModifier input {
+        border-bottom: 4px solid black;
+    }
+
+    .scoreButton, .scoreModifier input {
+        font-size: 5vw;
+    }
+
+    .scoreButton {
+        margin: 3%;
+        width: 25%;
+    }
+
+    #scoresBox {
+        align-items: center;
+    }
+
+    #scoresBox h1 {
+        font-size: 6vw;
+    }
+
+    
+}

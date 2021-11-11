@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Play BWC</title>
+    <link href="assets/style/style.css" rel="stylesheet" type="text/css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet"> 
+</head>
+<body>
+    <div class="welcomeWrapper">
+        <div class="welcomeBox">
+            <div class="header">
+                <h1><span id="cardCount">515</span> Blank White Cards</h1>
+            </div>
+
+            <div class="optionBox" id="play">
+                <h2 id="playGameHeader">Play Online</h2>
+                <form id="playForm" action="game.html" method="get">
+                    <label>Name</label>
+                    <input type="text" id="usernameInput" name="username" placeholder="Enter your name">
+                    <label>Game Code</label>
+                    <input type='text' id="gameIdInput" name="gameId" pattern="[A-Za-z]{4}" placeholder="Enter 4-letter code">
+                    <input type="submit" id="joinBtn" value="Play">
+                    </ul>
+                </form>
+            </div>
+
+            <div class="optionBox" id="score">
+                <h2>Scorekeeper</h2>
+                <p>Track scores for a physical game using the digital scorekeeper</p>
+                <form id="scoreForm" action="scores.html">
+                    <input type="submit" id="scoreBtn" value="Start">
+                </form>
+            </div>
+
+            <div class="optionBox" id="rules">
+                <h2>Rules</h2>
+                <p>Read the official game rules</p>
+                <form id="rulesForm" action="rules.html">
+                    <input type="submit" id="rulesBtn" value="Read">
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

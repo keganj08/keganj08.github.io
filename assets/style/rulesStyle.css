@@ -1,0 +1,170 @@
+html {
+    scroll-behavior: smooth;
+}
+
+#backToTop {
+    position: fixed;
+    bottom: 6%;
+    right: 5%;
+    display: flex;
+    background-color: black;
+    border-radius: 10px;
+    width: 35px;
+    height: 35px;
+    justify-content: center;
+    align-items: center;
+    padding-top: 4px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
+    opacity: 0;
+    border: 3px solid black;
+}
+
+#backToTop:hover {
+    cursor: pointer;
+    background: none;
+    color: black;
+}
+
+#backToTop:active {
+    background-color: gray;
+}
+
+.rulesWrapper {
+    display: grid;
+    grid-template-columns: auto 80% auto;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+        "header header header"
+        ". content .";
+    justify-items: center;
+}
+
+#rulesHeader {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: black;
+    margin: 15px 0 0 0;
+    margin-top: 0;
+    text-align: left;
+    justify-content: flex-end;
+    align-items: flex-start;
+    padding: 60px 80px;
+}
+
+#rulesHeader h1, #rulesHeader h2 {
+    margin: 0;
+}
+
+#rulesHeader h1 {
+    font-size: 120px;
+    line-height: 100px;
+    color: white;
+}
+
+#rulesHeader h2 {
+    color: gray;
+    font-size: 50px;
+    margin-top: 10px;
+}
+
+.rulesContent {
+    grid-area: content;
+    width: 100%;
+    max-width: 1200px;
+    position: relative;
+    padding: 10px 30px;
+    border-radius: 15px;
+}
+
+.rulesContent hr {
+    margin: 35px auto 0 auto;
+    border: none;
+    height: 1px;
+    background-color: gray;
+    outline: none;
+}
+
+.rulesContent h1 {
+    border-bottom: 2px solid black;
+    width: auto;
+    display: inline-block;
+}
+
+.rulesContent h1, .rulesContent h2 {
+    margin: 15px 0 15px 0;
+}
+
+.rulesContent h1:first-of-type {
+    margin-top: 30px;
+}
+
+.rulesContent h2 {
+    font-size: 19px;
+    margin-bottom: 5px;
+}
+
+
+.rulesContent .chunk h2:first-of-type {
+    margin-top: 0;
+}
+
+
+.rulesContent h3 {
+    margin: 10px 0;
+}
+
+.chunk {
+    margin-bottom: 35px;
+}
+
+.chunk p:first-of-type {
+    text-indent: 30px;
+}
+
+.rulesContent p, .rulesContent ul, .rulesContent ul li {
+    margin-top: 0;
+}
+
+.rulesContent p, .rulesContent ul li {
+    margin-bottom: 16px;
+}
+
+.rulesContent ul.longList {
+    padding: 0;
+}
+
+.rulesContent ul.longList li {
+    list-style: none;
+    padding: 0;
+}
+
+.ex {
+    color: rgb(100, 100, 100);
+    font-style: italic;
+}
+
+.in {
+    text-indent: 45px;
+}
+
+#haveFun {
+    margin: 70px 0 30px 0;
+    text-align: center;
+}
+
+*.unselectable {
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+ 
+    /*
+      Introduced in IE 10.
+      See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+    */
+    -ms-user-select: none;
+    user-select: none;
+ }
