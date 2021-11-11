@@ -168,3 +168,44 @@ html {
     -ms-user-select: none;
     user-select: none;
  }
+
+@media only screen and (max-device-width: 767px){
+    .rulesWrapper {
+        display: grid;
+        grid-template-columns: auto 85% auto;
+    }
+
+    #rulesHeader h1 {
+        font-size: 4.2vh;
+    }
+
+    #rulesHeader h2{
+        font-size: 3vh;
+    }
+
+    .rulesContent h1 {
+        font-size: 3vh;
+        border-bottom: 0.3vh solid black;
+    }
+
+    .rulesContent p, .rulesContent li {
+        font-size: 1.8vh;
+        margin-bottom: 2vh;
+    }
+
+    .rulesContent h2 {
+        font-size: 2vh;
+    }
+
+    #haveFun {
+        margin-bottom: 4vh;
+    }
+
+    #backToTop {
+        width: 7vh;
+        height: 7vh;
+        font-size: 3.8vh;
+        bottom: 5vh;
+        right: 4vh;
+    }
+}
