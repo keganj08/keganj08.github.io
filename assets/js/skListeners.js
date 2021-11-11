@@ -80,37 +80,45 @@ function givePlayerElEventListeners(playerEl) {
 
     playerEl.querySelector(".updateScoreButton1").addEventListener("click", function(){
         let pid = playerEl.id.split("player")[1];
-        let score = playerEl.querySelector(".playerScore").value;
-        let amt = playerEl.querySelector(".updateScoreButton1").innerHTML.replace("+", "");
-        Scoreboard.updatePlayerScore(pid, parseInt(score)+parseInt(amt));
-        Scoreboard.updateRanking();
-        updatePlayerDivs();
+        if(Scoreboard.isPlayerAlive(pid)){
+            let score = playerEl.querySelector(".playerScore").value;
+            let amt = playerEl.querySelector(".updateScoreButton1").innerHTML.replace("+", "");
+            Scoreboard.updatePlayerScore(pid, parseInt(score)+parseInt(amt));
+            Scoreboard.updateRanking();
+            updatePlayerDivs();
+        }
     })
 
     playerEl.querySelector(".updateScoreButton2").addEventListener("click", function(){
         let pid = playerEl.id.split("player")[1];
-        let score = playerEl.querySelector(".playerScore").value;
-        let amt = playerEl.querySelector(".updateScoreButton2").innerHTML.replace("+", "");
-        Scoreboard.updatePlayerScore(pid, parseInt(score)+parseInt(amt));
-        Scoreboard.updateRanking();
-        updatePlayerDivs();
+        if(Scoreboard.isPlayerAlive(pid)){
+            let score = playerEl.querySelector(".playerScore").value;
+            let amt = playerEl.querySelector(".updateScoreButton2").innerHTML.replace("+", "");
+            Scoreboard.updatePlayerScore(pid, parseInt(score)+parseInt(amt));
+            Scoreboard.updateRanking();
+            updatePlayerDivs();
+        }
     })
 
     playerEl.querySelector(".updateScoreButton3").addEventListener("click", function(){
         let pid = playerEl.id.split("player")[1];
-        let score = playerEl.querySelector(".playerScore").value;
-        let amt = playerEl.querySelector(".updateScoreButton3").innerHTML.replace("+", "");
-        Scoreboard.updatePlayerScore(pid, parseInt(score)+parseInt(amt));
-        Scoreboard.updateRanking();
-        updatePlayerDivs();
+        if(Scoreboard.isPlayerAlive(pid)){
+            let score = playerEl.querySelector(".playerScore").value;
+            let amt = playerEl.querySelector(".updateScoreButton3").innerHTML.replace("+", "");
+            Scoreboard.updatePlayerScore(pid, parseInt(score)+parseInt(amt));
+            Scoreboard.updateRanking();
+            updatePlayerDivs();
+        }
     })
 
     playerEl.querySelector(".updateScoreButton4").addEventListener("click", function(){
         let pid = playerEl.id.split("player")[1];
-        let score = playerEl.querySelector(".playerScore").value;
-        let amt = playerEl.querySelector(".updateScoreButton4").innerHTML.replace("+", "");
-        Scoreboard.updatePlayerScore(pid, parseInt(score)+parseInt(amt));
-        Scoreboard.updateRanking();
-        updatePlayerDivs();
+        if(Scoreboard.isPlayerAlive(pid)){
+            let score = playerEl.querySelector(".playerScore").value;
+            let amt = playerEl.querySelector(".updateScoreButton4").innerHTML.replace("+", "");
+            Scoreboard.updatePlayerScore(pid, parseInt(score)+parseInt(amt));
+            Scoreboard.updateRanking();
+            updatePlayerDivs();
+        }
     })
 }

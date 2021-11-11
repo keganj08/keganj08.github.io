@@ -25,77 +25,57 @@ var ranking = {
     initialize: function() {
         this.players = [];
     },
-    
-    updatePlayerScore: function(pid, score){
+
+    getPlayer(pid) {
         let ctr = 0;
         let playerFound = false;
         while(!playerFound && ctr < this.players.length) {
             if(this.players[ctr].pid == pid){
                 playerFound = true
-
-                this.players[ctr].score = score;
             } else {
                 ctr++;
             }
         }
+        return this.players[ctr]
+    },
+    
+    isPlayerAlive: function(pid) {
+        let aliveness = this.getPlayer(pid).isAlive;
+        return aliveness;
+    },
+
+    isPlayerPlayer: function(pid) {
+        return this.getPlayer(pid).isPlayer;
+    },
+
+    updatePlayerScore: function(pid, score){
+        this.getPlayer(pid).score = score;
     },
 
     updatePlayerName: function(pid, name){
-        let ctr = 0;
-        let playerFound = false;
-        while(!playerFound && ctr < this.players.length) {
-            if(this.players[ctr].pid == pid){
-                playerFound = true
-
-                this.players[ctr].name = name;
-            } else {
-                ctr++;
-            }
-        }
+        this.getPlayer(pid).name = name;
     },
 
     updatePlayer: function(pid, name, score){
-        let ctr = 0;
-        let playerFound = false;
-        while(!playerFound && ctr < this.players.length) {
-            if(this.players[ctr].pid == pid){
-                playerFound = true
-                this.players[ctr].score = score;
-                this.players[ctr].name = name;
-            } else {
-                ctr++;
-            }
-        }
+        player = this.getPlayer(pid);
+        player.score = score;
+        player.name = name;
     },
 
 
     togglePlayerIsAlive: function(pid){
-        let ctr = 0;
-        let playerFound = false;
-        while(!playerFound && ctr < this.players.length) {
-            if(this.players[ctr].pid == pid){
-                playerFound = true
-                if(this.players[ctr].isPlayer){
-                    this.players[ctr].toggleAlive();
-                }
-            }
-            ctr++;
+        player = this.getPlayer(pid);
+        if(player.isPlayer){
+            player.toggleAlive();
         }
     },
 
     togglePlayerIsPlayer: function(pid){
-        let ctr = 0;
-        let playerFound = false;
-        while(!playerFound && ctr < this.players.length) {
-            if(this.players[ctr].pid == pid){
-                playerFound = true
-                this.players[ctr].togglePlayer();
-                if(!this.players[ctr].isAlive){
-                    this.players[ctr].toggleAlive();
-                }
-            }
-            ctr++;
+        player = this.getPlayer(pid);
+        if(!player.isAlive){
+            player.toggleAlive();
         }
+        player.togglePlayer();
     },
 
     addNewPlayer: function() {
