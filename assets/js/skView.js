@@ -39,8 +39,6 @@ function addPlayerDiv(pid, pName="name", isAlive="true", isPlayer="true") {
     playerFlag.classList.add("playerFlag", "unselectable");
     newPlayer.append(playerFlag);
 
-
-
     /* to-do
 
     let addMinionBtn = document.createElement("div");

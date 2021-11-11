@@ -5,7 +5,6 @@
     grid-template-areas: 
         "header"
         "scoresBox"
-        "footer";
 }
 
 div {
@@ -20,6 +19,7 @@ div {
     align-items: center;
     background-color: rgb(230, 230, 230);
     box-shadow: 0 0 3px gray;
+    padding: 10px;
 }
 
 #scoreHeader {
@@ -30,10 +30,10 @@ div {
 #scoreHeader h1 {
     margin: 9px 0;
 }
+
 #scoreHeader h1, #scoreFooter h1 {
     font-size: 21px;
 }
-
 
 #scoreFooter {
     grid-area: footer;
@@ -64,7 +64,7 @@ div {
     display: flex;
     align-items: center;
     background-color: rgb(248, 248, 248);
-    margin: 0 9px 18px 9px;
+    margin: 0 9px 0 9px;
     border-radius: 1vh;
     text-align: center;
     width: 100px;
@@ -163,11 +163,10 @@ input {
     grid-template-areas:
         "name aliveFlag playerFlag . updateScoreBtn1 updateScoreBtn2 updateScoreBtn3 updateScoreBtn4 score";
     grid-column-gap: 2vw;
-    padding: 5px 20px;
+    padding: 11px 20px;
     width: 100%;
     min-width: 600px;
     background-color:rgb(230, 230, 230);
-    height: 70px;
     margin-bottom: 15px;
     align-items: center;
     justify-content: center;
@@ -248,7 +247,7 @@ input {
 }
 
 .addMinionButton, .updateScoreButton {
-    height: 50px;
+    min-height: 40px;
 }
 
 .addMinionButton:hover, .updateScoreButton:hover {
