@@ -24,7 +24,7 @@ html {
 
 #backToTop:hover {
     cursor: pointer;
-    background: none;
+    background-color: white;
     color: black;
 }
 
@@ -207,5 +207,6 @@ html {
         font-size: 3.8vh;
         bottom: 5.1vh;
         right: 4vh;
+        border: 0.3vh solid black;
     }
 }
