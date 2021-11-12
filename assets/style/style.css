@@ -240,9 +240,6 @@ form input[type="submit"]:hover{
 
     }
 
-    form input[type="submit"]{
-    }
-
     #dne {
         font-size: max(26px, 2.5vh);
     }
