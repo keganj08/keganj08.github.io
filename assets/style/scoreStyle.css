@@ -154,6 +154,7 @@ input {
 
 .removePlayerButton {
     grid-area: removeBtn;
+    font-size: 12px;
 }
 
 *.unselectable {
@@ -190,7 +191,7 @@ input {
     grid-template-columns: auto 1fr 1fr 4fr 0.75fr 0.75fr 0.75fr 0.75fr auto;
     grid-template-rows: 1fr;
     grid-template-areas:
-        "name aliveFlag playerFlag . updateScoreBtn1 updateScoreBtn2 updateScoreBtn3 updateScoreBtn4 score";
+        "name playerFlag aliveFlag . updateScoreBtn1 updateScoreBtn2 updateScoreBtn3 updateScoreBtn4 score";
     grid-column-gap: 2vw;
     padding: 11px 20px;
     width: 100%;
@@ -226,8 +227,9 @@ input {
 }
 
 .aliveFlag, .playerFlag {
-    font-size: 12px;
-    min-width: 50px;
+    font-size: 14px;
+    font-weight: bold;
+    width: 60px;
 }
 
 .aliveFlag, .playerFlag, .addMinionButton, .updateScoreButton {

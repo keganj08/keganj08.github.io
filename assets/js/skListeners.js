@@ -84,14 +84,14 @@ function givePlayerEventListeners(playerEl) {
     playerEl.querySelector(".aliveFlag").addEventListener("click", function(){
         let pid = playerEl.id.split("player")[1];
         Scoreboard.togglePlayerIsAlive(pid);
-        updatePlayerDivs();
+        updatePlayerFlagDivs(pid);
     });
 
     //Player flag clicked listener
     playerEl.querySelector(".playerFlag").addEventListener("click", function(){
         let pid = playerEl.id.split("player")[1];
         Scoreboard.togglePlayerIsPlayer(pid);
-        updatePlayerDivs();
+        updatePlayerFlagDivs(pid);
     });
 
     //Update score button 1 clicked listener

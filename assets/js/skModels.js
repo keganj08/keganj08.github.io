@@ -75,6 +75,7 @@ var ranking = {
         player.score = score;
         if(!player.isPlayer && player.score <= 0){
             this.removePlayer(player);
+            removePlayerDiv(pid);
         }
     },
 

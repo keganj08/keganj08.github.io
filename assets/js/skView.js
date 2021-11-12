@@ -21,6 +21,26 @@ function removePlayerDiv(pid) {
     document.getElementById(idStr).parentElement.remove();
 }
 
+function updatePlayerFlagDivs(pid){
+    let player = document.getElementById("player" + pid);
+
+    if(Scoreboard.isPlayerAlive(pid)){
+        player.querySelector(".aliveFlag").innerHTML = "ALIVE";
+        player.querySelector(".aliveFlag").classList.remove("dead");
+    } else {
+        player.querySelector(".aliveFlag").innerHTML = "GHOST";
+        player.querySelector(".aliveFlag").classList.add("dead");
+    }
+
+    if(Scoreboard.isPlayerPlayer(pid)){
+        player.querySelector(".playerFlag").innerHTML = "PLAYER";
+        player.querySelector(".playerFlag").classList.remove("npc");
+    } else {
+        player.querySelector(".playerFlag").innerHTML = "NPC";
+        player.querySelector(".playerFlag").classList.add("npc");
+    }
+}
+
 //Add a new player div
 function addPlayerDiv(pid, rank, pName=null, isAlive="true", isPlayer="true") {
     let newPlayerWrapper = document.createElement("div");
