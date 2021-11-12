@@ -4,11 +4,31 @@
 });
 */
 
+function adjustPlayerDiv(pid, rank){
+    idStr = "#player" + pid;
+    distTop = ($(idStr).outerHeight() + 15) * rank + $("#scoreHeader").outerHeight(true) + $("#scoreboardHeader").outerHeight(true);
+    $(idStr).parent().css("top", distTop +"px");   
+    $(idStr).parent().css("margin-left", "0px");
+
+}
+
+function updateScoreDiv(pid, score){
+    idStr = "player" + pid;
+    document.getElementById(idStr).querySelector(".playerScore").value = score;
+}
+
+function removePlayerDiv(pid) {
+    idStr = "player" + pid;
+    document.getElementById(idStr).parentElement.remove();
+}
+
 //Add a new player div
-function addPlayerDiv(pid, pName=null, isAlive="true", isPlayer="true") {
+function addPlayerDiv(pid, rank, pName=null, isAlive="true", isPlayer="true") {
     let newPlayerWrapper = document.createElement("div");
     newPlayerWrapper.classList.add("playerWrapper");
     newPlayerWrapper.id = "playerWrapper" + pid;
+    /*distTop = 
+    newPlayerWrapper.style.top = distTop.toString() + "px";*/
     $("#scores").append(newPlayerWrapper);
 
     let newPlayer = document.createElement("div");
@@ -105,13 +125,16 @@ function addPlayerDiv(pid, pName=null, isAlive="true", isPlayer="true") {
 
 //Updates the player divs
 function updatePlayerDivs() {
-    document.getElementById("scores").innerHTML = "";
     if(Scoreboard.players.length < 1){
-        document.getElementById("scores").innerHTML = "No players in the game :(";
+        document.getElementById("noPlayers").style.visibility = "visible";
     } else {
+        document.getElementById("noPlayers").style.visibility = "hidden";
         for(var i=0; i<Scoreboard.players.length; i++){
-            let newPlayer = addPlayerDiv(Scoreboard.players[i].pid, Scoreboard.players[i].name, Scoreboard.players[i].isAlive, Scoreboard.players[i].isPlayer);
+            adjustPlayerDiv(Scoreboard.players[i].pid, i);
+            /*
+            let newPlayer = addPlayerDiv(Scoreboard.players[i].pid, i, Scoreboard.players[i].name, Scoreboard.players[i].isAlive, Scoreboard.players[i].isPlayer);
             newPlayer.querySelector(".player").querySelector(".playerScore").value = Scoreboard.players[i].score;
+            */
         }
     }
 }

@@ -10,6 +10,7 @@ var player = {
         this.name = null;
         this.isAlive = true;
         this.isPlayer = true;
+        this.score = 0;
     },
 
     setScore: function(score) {this.score = score;},
@@ -26,7 +27,7 @@ var ranking = {
         this.players = [];
     },
 
-    getPlayer(pid) {
+    getPlayer: function(pid) {
         let ctr = 0;
         let playerFound = false;
         while(!playerFound && ctr < this.players.length) {
@@ -38,6 +39,23 @@ var ranking = {
         }
         if(playerFound){
             return this.players[ctr];
+        } else {
+            return null;
+        }
+    },
+    
+    getPlayerRank: function(pid) {
+        let ctr = 0;
+        let playerFound = false;
+        while(!playerFound && ctr < this.players.length) {
+            if(this.players[ctr].pid == pid){
+                playerFound = true
+            } else {
+                ctr++;
+            }
+        }
+        if(playerFound){
+            return ctr;
         } else {
             return null;
         }
@@ -90,7 +108,6 @@ var ranking = {
         //Creates a new player, adds them to the ranking, returns their pid
         let validIdFound = false;
         let newId = 0;
-        let ctr = 0;
         while(!validIdFound){
             validIdFound = true;
             for(var i=0; i<this.players.length; i++){
@@ -103,6 +120,7 @@ var ranking = {
             }
         }
         newPlayer = Object.create(player);
+        newPlayer.initialize();
         newPlayer.setPid(newId);
         this.players.push(newPlayer);
         return newPlayer.pid;

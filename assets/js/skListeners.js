@@ -1,8 +1,9 @@
 document.getElementById("newPlayerButton").addEventListener("click", function() {
     //Add a new player to the scoreboard, then create a player div with a corresponding id
     let newPlayerPid = Scoreboard.addNewPlayer();
-    addPlayerDiv(newPlayerPid);
     Scoreboard.updateRanking();
+    let rank = Scoreboard.getPlayerRank(newPlayerPid);
+    addPlayerDiv(newPlayerPid, rank);
     updatePlayerDivs();
 });
 
@@ -58,6 +59,7 @@ function givePlayerEventListeners(playerEl) {
     playerEl.parentElement.querySelector(".removePlayerButton").addEventListener("click", function(){
         let pid = playerEl.id.split("player")[1];
         Scoreboard.removePlayerByPid(pid);
+        removePlayerDiv(pid);
         Scoreboard.updateRanking();
         updatePlayerDivs();
     });
@@ -98,7 +100,9 @@ function givePlayerEventListeners(playerEl) {
         if(Scoreboard.isPlayerAlive(pid)){
             let score = playerEl.querySelector(".playerScore").value;
             let amt = playerEl.querySelector(".updateScoreButton1").innerHTML.replace("+", "");
-            Scoreboard.updatePlayerScore(pid, parseInt(score)+parseInt(amt));
+            newScore = parseInt(score) + parseInt(amt);
+            updateScoreDiv(pid, newScore);
+            Scoreboard.updatePlayerScore(pid, newScore);
             Scoreboard.updateRanking();
             updatePlayerDivs();
         }
@@ -110,6 +114,8 @@ function givePlayerEventListeners(playerEl) {
         if(Scoreboard.isPlayerAlive(pid)){
             let score = playerEl.querySelector(".playerScore").value;
             let amt = playerEl.querySelector(".updateScoreButton2").innerHTML.replace("+", "");
+            newScore = parseInt(score) + parseInt(amt);
+            updateScoreDiv(pid, newScore);
             Scoreboard.updatePlayerScore(pid, parseInt(score)+parseInt(amt));
             Scoreboard.updateRanking();
             updatePlayerDivs();
@@ -122,7 +128,9 @@ function givePlayerEventListeners(playerEl) {
         if(Scoreboard.isPlayerAlive(pid)){
             let score = playerEl.querySelector(".playerScore").value;
             let amt = playerEl.querySelector(".updateScoreButton3").innerHTML.replace("+", "");
-            Scoreboard.updatePlayerScore(pid, parseInt(score)+parseInt(amt));
+            newScore = parseInt(score) + parseInt(amt);
+            updateScoreDiv(pid, newScore);
+            Scoreboard.updatePlayerScore(pid, newScore);
             Scoreboard.updateRanking();
             updatePlayerDivs();
         }
@@ -134,7 +142,9 @@ function givePlayerEventListeners(playerEl) {
         if(Scoreboard.isPlayerAlive(pid)){
             let score = playerEl.querySelector(".playerScore").value;
             let amt = playerEl.querySelector(".updateScoreButton4").innerHTML.replace("+", "");
-            Scoreboard.updatePlayerScore(pid, parseInt(score)+parseInt(amt));
+            newScore = parseInt(score) + parseInt(amt);
+            updateScoreDiv(pid, newScore);
+            Scoreboard.updatePlayerScore(pid, newScore);
             Scoreboard.updateRanking();
             updatePlayerDivs();
         }
