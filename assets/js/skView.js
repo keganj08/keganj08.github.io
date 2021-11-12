@@ -4,9 +4,21 @@
 });
 */
 
+$("#draggableScoreModifier").draggable({
+    revert: true,
+
+    drag: function() {
+        $("#draggableScoreModifier").css("cursor", "grabbing");
+    },
+
+    stop: function() {
+        $("#draggableScoreModifier").css("cursor", "grab");
+    }
+});
+
 function adjustPlayerDiv(pid, rank){
     idStr = "#player" + pid;
-    distTop = ($(idStr).outerHeight() + 15) * rank + $("#scoreHeader").outerHeight(true) + $("#scoreboardHeader").outerHeight(true);
+    distTop = ($(idStr).outerHeight() + 15) * rank; //+ $("#scoreHeader").outerHeight(true) + $("#scoreboardHeader").outerHeight(true);
     $(idStr).parent().css("top", distTop +"px");   
     $(idStr).parent().css("margin-left", "0px");
 }

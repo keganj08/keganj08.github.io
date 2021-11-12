@@ -7,22 +7,30 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet"> 
+    <script src="https://kit.fontawesome.com/e0b2d0631a.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <div id="scoreWrapper">
         <div id="scoreHeader">
             <div id="scoreButtonsBox">
                 <div class="scoreButton scoreModifier" id="scoreModifier1">
-                    <input type="number" class="numeric" id="scoreModVal1" value="-150"></input>
+                    <input class="scoreModInput" type="number" class="numeric" id="scoreModVal1" value="-150"></input>
                 </div>
                 <div class="scoreButton scoreModifier" id="scoreModifier2">
-                    <input type="number" class="numeric" id="scoreModVal2" value="-50"></input>
+                    <input class="scoreModInput" type="number" class="numeric" id="scoreModVal2" value="-50"></input>
                 </div>
                 <div class="scoreButton scoreModifier" id="scoreModifier3">
-                    <input type="number" class="numeric" id="scoreModVal3" value="50"></input>
+                    <input class="scoreModInput" type="number" class="numeric" id="scoreModVal3" value="50"></input>
                 </div>
                 <div class="scoreButton scoreModifier" id="scoreModifier4">
-                    <input type="number" class="numeric" id="scoreModVal4" value="150"></input>
+                    <input class="scoreModInput" type="number" class="numeric" id="scoreModVal4" value="150"></input>
+                </div>
+
+                <div class="scoreButtonDivider"></div>
+
+                <div class="scoreButton scoreModifier" id="draggableScoreModifier">
+                    <input class="scoreModInput" type="number" class="numeric" id="scoreModValDraggable" value="100"></input>
+                    <i class="moveIcon fas fa-arrows-alt"></i>
                 </div>
             </div>
         </div>
@@ -43,6 +51,7 @@
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
     <script src="assets/js/skModels.js"></script>
     <script src="assets/js/skView.js"></script>
     <script src="assets/js/skListeners.js"></script>
