@@ -61,6 +61,7 @@ div.welcomeBox {
 div.optionBox {
     background-color: rgb(230, 230, 230);
     border-radius: 15px;
+    border: 3px solid black;
     text-align: center;
     padding: 7%;
     font-family: 'Open Sans', sans-serif;

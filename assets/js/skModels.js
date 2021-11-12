@@ -1,13 +1,13 @@
 var player = {
     pid: 0,
-    name: "name",
+    name: null,
     score: 0,
     isAlive: true,
     isPlayer: true,
 
     initialize: function() {
         this.pid = 0;
-        this.name = "name";
+        this.name = null;
         this.isAlive = true;
         this.isPlayer = true;
     },
@@ -36,7 +36,11 @@ var ranking = {
                 ctr++;
             }
         }
-        return this.players[ctr]
+        if(playerFound){
+            return this.players[ctr];
+        } else {
+            return null;
+        }
     },
     
     isPlayerAlive: function(pid) {
@@ -49,7 +53,11 @@ var ranking = {
     },
 
     updatePlayerScore: function(pid, score){
-        this.getPlayer(pid).score = score;
+        player = this.getPlayer(pid);
+        player.score = score;
+        if(!player.isPlayer && player.score <= 0){
+            this.removePlayer(player);
+        }
     },
 
     updatePlayerName: function(pid, name){
@@ -102,7 +110,16 @@ var ranking = {
 
     removePlayer: function(player) {
         //Removes a player from the ranking
-        const index = this.players.indexOf(currentLeader);
+        const index = this.players.indexOf(player);
+        if (index > -1) {
+            this.players.splice(index, 1);
+        }
+    },
+
+    removePlayerByPid: function(pid) {
+        //Removes a player from the ranking based on pid
+        player = this.getPlayer(pid);
+        const index = this.players.indexOf(player)
         if (index > -1) {
             this.players.splice(index, 1);
         }

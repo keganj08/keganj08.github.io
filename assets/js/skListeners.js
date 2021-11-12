@@ -50,7 +50,19 @@ document.getElementById("scoreModVal4").addEventListener("blur", function() {
     }
 });
 
-function givePlayerElEventListeners(playerEl) {
+function givePlayerEventListeners(playerEl) {
+
+    /*playerEl = playerWrapperEl.querySelector(".player");*/
+
+    //Remove player button listener
+    playerEl.parentElement.querySelector(".removePlayerButton").addEventListener("click", function(){
+        let pid = playerEl.id.split("player")[1];
+        Scoreboard.removePlayerByPid(pid);
+        Scoreboard.updateRanking();
+        updatePlayerDivs();
+    });
+
+    //Unfocusing on score listener
     playerEl.querySelector(".playerScore").addEventListener("blur", function(){
         let pid = playerEl.id.split("player")[1];
         let score = playerEl.querySelector(".playerScore").value;
@@ -59,25 +71,28 @@ function givePlayerElEventListeners(playerEl) {
         updatePlayerDivs();
     });
 
+    //Unfocusing on name listener
     playerEl.querySelector(".playerName").addEventListener("blur", function(){
-        let pid = playerEl.id.split("player")[1];
+        let pid = playerEl.id.split("player")[1]; 
         let name = playerEl.querySelector(".playerName").value;
         Scoreboard.updatePlayerName(pid, name);
-    })
+    });
 
-
+    //Alive flag clicked listener
     playerEl.querySelector(".aliveFlag").addEventListener("click", function(){
         let pid = playerEl.id.split("player")[1];
         Scoreboard.togglePlayerIsAlive(pid);
         updatePlayerDivs();
-    })
+    });
 
+    //Player flag clicked listener
     playerEl.querySelector(".playerFlag").addEventListener("click", function(){
         let pid = playerEl.id.split("player")[1];
         Scoreboard.togglePlayerIsPlayer(pid);
         updatePlayerDivs();
-    })
+    });
 
+    //Update score button 1 clicked listener
     playerEl.querySelector(".updateScoreButton1").addEventListener("click", function(){
         let pid = playerEl.id.split("player")[1];
         if(Scoreboard.isPlayerAlive(pid)){
@@ -87,8 +102,9 @@ function givePlayerElEventListeners(playerEl) {
             Scoreboard.updateRanking();
             updatePlayerDivs();
         }
-    })
+    });
 
+    //Update score button 2 clicked listener
     playerEl.querySelector(".updateScoreButton2").addEventListener("click", function(){
         let pid = playerEl.id.split("player")[1];
         if(Scoreboard.isPlayerAlive(pid)){
@@ -98,8 +114,9 @@ function givePlayerElEventListeners(playerEl) {
             Scoreboard.updateRanking();
             updatePlayerDivs();
         }
-    })
+    });
 
+    //Update score button 3 clicked listener
     playerEl.querySelector(".updateScoreButton3").addEventListener("click", function(){
         let pid = playerEl.id.split("player")[1];
         if(Scoreboard.isPlayerAlive(pid)){
@@ -109,8 +126,9 @@ function givePlayerElEventListeners(playerEl) {
             Scoreboard.updateRanking();
             updatePlayerDivs();
         }
-    })
+    });
 
+    //Update score button 4 clicked listener
     playerEl.querySelector(".updateScoreButton4").addEventListener("click", function(){
         let pid = playerEl.id.split("player")[1];
         if(Scoreboard.isPlayerAlive(pid)){
@@ -120,5 +138,5 @@ function givePlayerElEventListeners(playerEl) {
             Scoreboard.updateRanking();
             updatePlayerDivs();
         }
-    })
+    });
 }

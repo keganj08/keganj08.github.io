@@ -5,21 +5,34 @@
 */
 
 //Add a new player div
-function addPlayerDiv(pid, pName="name", isAlive="true", isPlayer="true") {
+function addPlayerDiv(pid, pName=null, isAlive="true", isPlayer="true") {
+    let newPlayerWrapper = document.createElement("div");
+    newPlayerWrapper.classList.add("playerWrapper");
+    newPlayerWrapper.id = "playerWrapper" + pid;
+    $("#scores").append(newPlayerWrapper);
+
     let newPlayer = document.createElement("div");
     newPlayer.classList.add("player");
     let idStr = "player" + pid;
     newPlayer.id = idStr;
-    $("#scores").append(newPlayer);
+    newPlayerWrapper.append(newPlayer);
+
+    let remPlayerBtn = document.createElement("div");
+    remPlayerBtn.innerHTML = "-";
+    remPlayerBtn.classList.add("removePlayerButton");
+    newPlayerWrapper.append(remPlayerBtn);
 
     let name = document.createElement("input");
     name.classList.add("playerName");
     name.type = "text";
-    name.value = pName;
+    if(pName){
+        name.value = pName;
+    } else {
+        name.value = "player " + pid;
+    }
     newPlayer.append(name);
 
     let aliveFlag = document.createElement("div");
-
     if(isAlive){
         aliveFlag.innerHTML = "ALIVE";
     } else {
@@ -38,14 +51,6 @@ function addPlayerDiv(pid, pName="name", isAlive="true", isPlayer="true") {
     }
     playerFlag.classList.add("playerFlag", "unselectable");
     newPlayer.append(playerFlag);
-
-    /* to-do
-
-    let addMinionBtn = document.createElement("div");
-    addMinionBtn.innerHTML = "+Minion";
-    addMinionBtn.classList.add("addMinionButton", "unselectable");
-    newPlayer.append(addMinionBtn);
-    */
 
     let updateScoreBtn1 = document.createElement("div");
     let scoreModVal1 = document.getElementById("scoreModVal1").value;
@@ -94,8 +99,8 @@ function addPlayerDiv(pid, pName="name", isAlive="true", isPlayer="true") {
     score.value = "0";
     newPlayer.append(score);
 
-    givePlayerElEventListeners(newPlayer);
-    return newPlayer;
+    givePlayerEventListeners(newPlayer);
+    return newPlayerWrapper;
 }
 
 //Updates the player divs
@@ -106,7 +111,7 @@ function updatePlayerDivs() {
     } else {
         for(var i=0; i<Scoreboard.players.length; i++){
             let newPlayer = addPlayerDiv(Scoreboard.players[i].pid, Scoreboard.players[i].name, Scoreboard.players[i].isAlive, Scoreboard.players[i].isPlayer);
-            newPlayer.querySelector(".playerScore").value = Scoreboard.players[i].score;
+            newPlayer.querySelector(".player").querySelector(".playerScore").value = Scoreboard.players[i].score;
         }
     }
 }
