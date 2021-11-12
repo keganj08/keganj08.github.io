@@ -9,7 +9,6 @@ function adjustPlayerDiv(pid, rank){
     distTop = ($(idStr).outerHeight() + 15) * rank + $("#scoreHeader").outerHeight(true) + $("#scoreboardHeader").outerHeight(true);
     $(idStr).parent().css("top", distTop +"px");   
     $(idStr).parent().css("margin-left", "0px");
-
 }
 
 function updateScoreDiv(pid, score){
@@ -38,8 +37,8 @@ function addPlayerDiv(pid, rank, pName=null, isAlive="true", isPlayer="true") {
     newPlayerWrapper.append(newPlayer);
 
     let remPlayerBtn = document.createElement("div");
-    remPlayerBtn.innerHTML = "-";
-    remPlayerBtn.classList.add("removePlayerButton");
+    remPlayerBtn.innerHTML = "X";
+    remPlayerBtn.classList.add("removePlayerButton", "unselectable");
     newPlayerWrapper.append(remPlayerBtn);
 
     let name = document.createElement("input");
