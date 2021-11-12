@@ -94,7 +94,7 @@ input {
     grid-area: scoresBox;
     flex-direction: column;
     display: flex;
-    padding: 0 12%;
+    padding: 0 12.5%;
 }
 
 #scoresBox span {
@@ -172,7 +172,8 @@ input {
 
  .playerWrapper {
     margin-left: 200px;
-    transition: top 0.5s, margin-left 0.35s;
+    width: 75%;
+    transition: top 0.5s, margin-left 0.35s, width 0.2s;
     display: grid;
     grid-template-columns: 1fr auto;
     grid-template-rows: 1fr;
@@ -195,17 +196,26 @@ input {
     grid-column-gap: 2vw;
     padding: 11px 20px;
     width: 100%;
-    min-width: 600px;
+    min-width: 400px;
     background-color:rgb(230, 230, 230);
     border: 3px solid black;
     align-items: center;
     justify-content: center;
     border-radius: 10px;
+    overflow: hidden;
 }
 
 
 
 @media only screen and (max-width: 1000px){
+    #scoresBox {
+        padding: 0 4%;
+    }
+
+    .playerWrapper {
+        width: 92%;
+    }
+
     .player {
         grid-template-columns: auto 1fr 1fr 0fr 0.75fr 0.75fr 0.75fr 0.75fr auto;
     }
