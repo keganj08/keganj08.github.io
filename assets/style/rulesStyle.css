@@ -7,14 +7,13 @@ html {
     bottom: 6%;
     right: 5%;
     display: flex;
-    background-color: black;
+    background-color: white;
     border-radius: 10px;
     width: 35px;
     height: 35px;
     justify-content: center;
     align-items: center;
-    padding-top: 4px;
-    color: white;
+    color: black;
     text-decoration: none;
     font-weight: bold;
     font-size: 18px;
@@ -24,8 +23,8 @@ html {
 
 #backToTop:hover {
     cursor: pointer;
-    background-color: white;
-    color: black;
+    background-color: black;
+    color: white;
 }
 
 #backToTop:active {

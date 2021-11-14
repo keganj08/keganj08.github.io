@@ -179,15 +179,17 @@ function givePlayerEventListeners(playerEl) {
     //Alive flag clicked listener
     playerEl.querySelector(".aliveFlag").addEventListener("click", function(){
         let pid = playerEl.id.split("player")[1];
-        if(Scoreboard.isPlayerAlive(pid)){
-            playerEl.classList.add("deadPlayer");
-            playerEl.querySelector(".playerScore").readOnly = true;
-        } else {
-            playerEl.classList.remove("deadPlayer");
-            playerEl.querySelector(".playerScore").readOnly = false;
+            if(Scoreboard.isPlayerPlayer(pid)){
+            if(Scoreboard.isPlayerAlive(pid)){
+                playerEl.classList.add("deadPlayer");
+                playerEl.querySelector(".playerScore").readOnly = true;
+            } else {
+                playerEl.classList.remove("deadPlayer");
+                playerEl.querySelector(".playerScore").readOnly = false;
+            }
+            Scoreboard.togglePlayerIsAlive(pid);
+            updatePlayerFlagDivs(pid);
         }
-        Scoreboard.togglePlayerIsAlive(pid);
-        updatePlayerFlagDivs(pid);
     });
 
     //Player flag clicked listener

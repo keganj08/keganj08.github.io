@@ -92,7 +92,6 @@ div {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    border: 2px solid black;
     z-index: 1000;
 }
 
@@ -170,14 +169,13 @@ input {
     font-weight: bold;
     position: relative;
     bottom: 2px;
-    border: 2px solid black;
 
 }
 
 #newPlayerButton, .removePlayerButton {
     height: 25px;
     width: 25px;
-    background-color: white;
+    background-color: rgb(230,230,230);
     color: black;
     border-radius: 10px;
 }
@@ -244,7 +242,7 @@ input {
     width: 100%;
     min-width: 400px;
     background-color:rgb(230, 230, 230);
-    border: 2px solid black;
+    /*border: 2px solid black;*/
     align-items: center;
     justify-content: center;
     border-radius: 10px;
@@ -252,6 +250,7 @@ input {
     transition: border 0.3s;
 }
 
+/*
 .deadPlayer {
     border: 2px solid rgb(101, 82, 112);
 }
@@ -259,6 +258,7 @@ input {
 .npcPlayer {
     border: 2px solid rgb(133, 126, 117);
 }
+*/
 
 .selectablePlayer .player * {
     pointer-events: none;
@@ -298,6 +298,7 @@ input {
     height: 20px;
     width: 20px;
     margin-right: 2vw;
+    border: 2px solid black;
 }
 
 #newPlayerButton, .removePlayerButton, .selectPlayerButton {
