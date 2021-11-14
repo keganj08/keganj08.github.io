@@ -94,8 +94,9 @@ var ranking = {
         if(!player.isPlayer && player.score <= 0){
             this.removePlayer(player);
             removePlayerDiv(pid);
+        } else { 
+            updateScoreDiv(pid, player.score);
         }
-        updateScoreDiv(pid, player.score);
     },
 
     updatePlayersScores: function(pids, score){
