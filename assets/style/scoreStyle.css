@@ -1,5 +1,6 @@
 html, body {
     height: 100%;
+    overflow: auto;
 }
 
 #scoreWrapper {
@@ -9,7 +10,7 @@ html, body {
     grid-template-areas: 
         "header"
         "scoresBox";
-    height: 100%;
+    height: auto;
 }
 
 div {
@@ -18,16 +19,20 @@ div {
     box-sizing: border-box;         /* Opera/IE 8+ */
 }
 
-#scoreHeader, #scoreFooter {
+#scoreHeader {
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: rgb(230, 230, 230);
     padding: 10px;
+    height: 70px;
+    position: fixed;
+    z-index: 700;
 }
 
 #scoreHeader {
     grid-area: header;
+    width: 100%;
 }
 
 #scoreHeader h1 {
@@ -36,6 +41,38 @@ div {
 
 #scoreHeader h1, #scoreFooter h1 {
     font-size: 21px;
+}
+
+#helpButton {
+    background-color: rgb(248, 248, 248);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 27px;
+    width: 27px;
+    border-radius: 50%;
+    position: absolute;
+    right: 15px;
+    transition: background-color 0.3s, color 0.3s;
+    box-shadow: 0 0 3px gray;
+}
+
+#helpButton:hover {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
+
+#helpWindow {
+    width: 80%;
+    height: 80%;
+    background-color: white;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    z-index: 99999;
+    position: absolute;
+    display: none;
 }
 
 #scoreFooter {
@@ -83,7 +120,6 @@ div {
     text-align: center;
     width: 100px;
     height: max(50px, 65%);
-    z-index: 500;
 }
 
 #draggableScoreModifier {
@@ -92,7 +128,8 @@ div {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    z-index: 1000;
+    position: relative;
+    z-index: 9000;
 }
 
 #draggableScoreModifier input {
@@ -136,15 +173,14 @@ input {
     display: flex;
     padding: 0 12.5%;
     transition: width 0.2s;
-    height: 100%;
+    margin-top: 70px;
+    position: relative;
 }
 
 #scores {
     flex-direction: column;
     align-items: center;
-    height: 100%;
     position: relative;
-    padding-bottom: 200px;
 }
 
 #noPlayers {
@@ -215,6 +251,12 @@ input {
     user-select: none;
  }
 
+#bookend {
+    height: 1px;
+    width: 100%;
+    position: relative;
+}
+
  .playerWrapper {
     width: 100%;
     margin-left: 200px;
@@ -242,12 +284,10 @@ input {
     width: 100%;
     min-width: 400px;
     background-color:rgb(230, 230, 230);
-    /*border: 2px solid black;*/
     align-items: center;
     justify-content: center;
     border-radius: 10px;
     overflow: hidden;
-    transition: border 0.3s;
 }
 
 /*
@@ -280,8 +320,9 @@ input {
 */
 
 .highlightedPlayer {
+    position: relative;
     box-shadow: 0 0 0 1000vmax rgba(0,0,0,0.3);
-    z-index: 700;
+    z-index: 600;
 }
 
 .selectablePlayer .player:hover, .selectablePlayer .selectPlayerButton:hover {
@@ -295,8 +336,8 @@ input {
 .selectPlayerButton {
     grid-area: selectBtn;
     border-radius: 50%;
-    height: 20px;
-    width: 20px;
+    height: 15px;
+    width: 15px;
     margin-right: 2vw;
     border: 2px solid black;
 }

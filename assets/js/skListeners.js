@@ -59,13 +59,30 @@ document.getElementById("scoreModifierMulti").addEventListener("click", function
             removeSelectButtons();
             selectMode = false;
             $("#newPlayerButton").removeClass("hiddenBtn");
+            $(this).css("border", "none");
         } else {
             addSelectButtons();
             selectMode = true;
             $("#newPlayerButton").addClass("hiddenBtn");
+            $(this).css("border", "2px solid black");
         }
     }
 });
+
+function updateSelectedScores(amt) {
+    let selectedPlayers = document.getElementsByClassName("selected");
+    let pids = [];
+    for(var i=0; i<selectedPlayers.length; i++){
+        pids.push(selectedPlayers[i].querySelector(".player").id.split("player")[1]);
+    }
+    Scoreboard.updatePlayersScores(pids, amt);
+    Scoreboard.updateRanking();
+    updatePlayerDivs();
+    selectMode = false;
+    $("#newPlayerButton").removeClass("hiddenBtn");
+    removeSelectButtons();
+    $("#scoreModifierMulti").css("border", "none");
+}
 
 $("#scoreModifierMulti").droppable({
     over: function() {
@@ -74,7 +91,6 @@ $("#scoreModifierMulti").droppable({
         }
     },
 
-    
     out: function() {
         if(selectMode){
             this.classList.remove("highlightedPlayer");
@@ -85,18 +101,8 @@ $("#scoreModifierMulti").droppable({
         this.classList.remove("highlightedPlayer");
         if(Scoreboard.players.length > 0){
             if(selectMode){
-                let selectedPlayers = document.getElementsByClassName("selected");
-                let pids = [];
-                for(var i=0; i<selectedPlayers.length; i++){
-                    pids.push(selectedPlayers[i].querySelector(".player").id.split("player")[1]);
-                }
                 let amt = $(ui.draggable).find(".scoreModInput").val();
-                Scoreboard.updatePlayersScores(pids, amt);
-                Scoreboard.updateRanking();
-                updatePlayerDivs();
-                selectMode = false;
-                $("#newPlayerButton").removeClass("hiddenBtn");
-                removeSelectButtons();
+                updateSelectedScores(amt);
             }
         }
     }
@@ -118,13 +124,15 @@ function givePlayerEventListeners(playerEl) {
         drop: function(event, ui){
             if(Scoreboard.isPlayerAlive(this.id.split("player")[1])){
                 this.classList.remove("highlightedPlayer");
-                let score = playerEl.querySelector(".playerScore").value;
                 let amt = $(ui.draggable).find(".scoreModInput").val();
-                let newScore = parseInt(score) + parseInt(amt);
-                let pid = this.id.split("player")[1];
-                Scoreboard.updatePlayerScore(pid, newScore);
-                Scoreboard.updateRanking();
-                updatePlayerDivs();
+                if(selectMode){
+                    updateSelectedScores(amt);
+                } else { 
+                    let pid = this.id.split("player")[1];
+                    Scoreboard.updatePlayerScore(pid, amt);
+                    Scoreboard.updateRanking();
+                    updatePlayerDivs();
+                }
             }
         }
     });

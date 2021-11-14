@@ -8,19 +8,33 @@ $("#draggableScoreModifier").draggable({
     revert: true,
 
     drag: function() {
+        $("#draggableScoreModifier").css("box-shadow", "0 0 3px gray");
         $("#draggableScoreModifier").css("cursor", "grabbing");
     },
 
     stop: function() {
+        $("#draggableScoreModifier").css("box-shadow", "none");
         $("#draggableScoreModifier").css("cursor", "grab");
     }
 });
+
+function adjustBookend() {
+    let players = document.getElementsByClassName("player");
+    if(players.length > 0){
+        bookendDistTop = ($(players[0]).outerHeight() + 15) * players.length;
+    } else {
+        bookendDistTop = 0;
+    }
+    $("#bookend").css("top", bookendDistTop);
+}
 
 function adjustPlayerDiv(pid, rank){
     idStr = "#player" + pid;
     distTop = ($(idStr).outerHeight() + 15) * rank; //+ $("#scoreHeader").outerHeight(true) + $("#scoreboardHeader").outerHeight(true);
     $(idStr).parent().css("top", distTop +"px");   
     $(idStr).parent().css("margin-left", "0px");
+
+    adjustBookend();
 }
 
 function updateScoreDiv(pid, score){
