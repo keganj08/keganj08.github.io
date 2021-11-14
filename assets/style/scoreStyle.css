@@ -249,6 +249,15 @@ input {
     justify-content: center;
     border-radius: 10px;
     overflow: hidden;
+    transition: border 0.3s;
+}
+
+.deadPlayer {
+    border: 2px solid rgb(101, 82, 112);
+}
+
+.npcPlayer {
+    border: 2px solid rgb(133, 126, 117);
 }
 
 .selectablePlayer .player * {
@@ -291,8 +300,8 @@ input {
     margin-right: 2vw;
 }
 
-.removePlayerButton, .selectPlayerButton {
-    transition: margin 0.3s, height 0.3s, width 0.3s, opacity 0.3s, visibility 0.3s, background-color 0.3s;
+#newPlayerButton, .removePlayerButton, .selectPlayerButton {
+    transition: margin 0.3s, height 0.3s, width 0.3s, opacity 0.3s, background-color 0.3s;
 }
 
 .hiddenBtn {
@@ -301,6 +310,10 @@ input {
     opacity: 0;
     margin-left: 0;
     margin-right: 0;
+}
+
+.unclickableSelectButton {
+    visibility: hidden;
 }
 
 .selectablePlayer:hover .deadPlayer {
@@ -375,7 +388,7 @@ input {
     background-color:rgb(248, 248, 248);
 }
 
-.deadPlayer .playerScore {
+.deadPlayer .playerScore{
     color:rgb(101, 82, 112); 
     border-bottom-color: rgb(101, 82, 112);
     border-bottom: none;

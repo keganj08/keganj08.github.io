@@ -58,9 +58,11 @@ document.getElementById("scoreModifierMulti").addEventListener("click", function
         if(selectMode){
             removeSelectButtons();
             selectMode = false;
+            $("#newPlayerButton").removeClass("hiddenBtn");
         } else {
             addSelectButtons();
             selectMode = true;
+            $("#newPlayerButton").addClass("hiddenBtn");
         }
     }
 });
@@ -93,6 +95,7 @@ $("#scoreModifierMulti").droppable({
                 Scoreboard.updateRanking();
                 updatePlayerDivs();
                 selectMode = false;
+                $("#newPlayerButton").removeClass("hiddenBtn");
                 removeSelectButtons();
             }
         }
@@ -193,6 +196,13 @@ function givePlayerEventListeners(playerEl) {
         Scoreboard.togglePlayerIsPlayer(pid);
         playerEl.classList.remove("deadPlayer");
         playerEl.querySelector(".playerScore").readOnly = false;
+
+        if(Scoreboard.isPlayerPlayer(pid)){
+            playerEl.classList.remove("npcPlayer");
+        } else {
+            playerEl.classList.add("npcPlayer");
+        }
+
         updatePlayerFlagDivs(pid);
     });
 
@@ -241,10 +251,8 @@ function givePlayerEventListeners(playerEl) {
     });
 }
 
-function giveSelectButtonListeners(buttonEl) {
-    
+function giveSelectButtonListeners(buttonEl) { 
     //let bid = $(buttonEl).parent().find(".player").attr("id").split("player")[1];
-    
 
     buttonEl.parentElement.querySelector(".player").addEventListener("click", function(){
         if(selectMode && !$(this).hasClass("deadPlayer")){

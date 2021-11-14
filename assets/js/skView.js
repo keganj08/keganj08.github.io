@@ -154,7 +154,6 @@ function addPlayerDiv(pid, rank, pName=null, isAlive="true", isPlayer="true") {
     newPlayerWrapper.append(newSelectButton);
     giveSelectButtonListeners(newSelectButton);
 
-
     givePlayerEventListeners(newPlayer);
     return newPlayerWrapper;
 }
@@ -182,32 +181,18 @@ function addSelectButtons() {
         let idStr = "#player" + playerIds[i];
         $(idStr).parent().addClass("selectablePlayer");
         $(idStr).parent().find(".removePlayerButton").addClass("hiddenBtn");
+        $(idStr).parent().find(".selectPlayerButton").removeClass("hiddenBtn");
         if(!$(idStr).hasClass("deadPlayer")){
-            $(idStr).parent().find(".selectPlayerButton").removeClass("hiddenBtn");
+            if($(idStr).hasClass("unclickableSelectButton")){
+                $(idStr).parent().find(".selectPlayerButton").removeClass("unclickableSelectButton");        
+            }
         } else {
-            $(idStr).parent().find(".selectPlayerButton").addClass("hiddenBtn");        
+            $(idStr).parent().find(".selectPlayerButton").addClass("unclickableSelectButton");        
         }
-        /*
-        let newSelectButton = document.createElement("div");
-        newSelectButton.classList.add("selectPlayerButton", "unselectable");
-        $(idStr).parent().prepend(newSelectButton);
-        $(idStr).parent().addClass("selectablePlayer");
-        if(!$(idStr).hasClass("deadPlayer")){
-            giveSelectButtonListeners(newSelectButton);
-        } else {
-            $(newSelectButton).css("opacity", "0");
-        }
-        */
     }
 }
 
 function removeSelectButtons() {
-    /*
-    let selectButtons = document.getElementsByClassName("selectPlayerButton");
-    while(selectButtons.length > 0){
-        selectButtons[0].remove();
-    }*/
-
     let playerIds = Scoreboard.getPids();
     for(var i=0; i<playerIds.length; i++){
         let idStr = "#player" + playerIds[i];
