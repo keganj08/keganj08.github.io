@@ -60,6 +60,14 @@ var ranking = {
             return null;
         }
     },
+
+    getPids: function(){
+        let ids = [];
+        for(var i=0; i<this.players.length; i++){
+            ids.push(this.players[i].pid);
+        }
+        return ids;
+    },
     
     isPlayerAlive: function(pid) {
         let aliveness = this.getPlayer(pid).isAlive;
@@ -70,12 +78,29 @@ var ranking = {
         return this.getPlayer(pid).isPlayer;
     },
 
-    updatePlayerScore: function(pid, score){
-        player = this.getPlayer(pid);
-        player.score = score;
+    setPlayerScore: function(pid, score){
+        let player = this.getPlayer(pid);
+        player.score = parseInt(score);
         if(!player.isPlayer && player.score <= 0){
             this.removePlayer(player);
             removePlayerDiv(pid);
+        }
+        updateScoreDiv(pid, player.score);
+    },
+
+    updatePlayerScore: function(pid, score){
+        let player = this.getPlayer(pid);
+        player.score += parseInt(score);
+        if(!player.isPlayer && player.score <= 0){
+            this.removePlayer(player);
+            removePlayerDiv(pid);
+        }
+        updateScoreDiv(pid, player.score);
+    },
+
+    updatePlayersScores: function(pids, score){
+        for(var i=0; i<pids.length; i++){
+            this.updatePlayerScore(pids[i], score)
         }
     },
 

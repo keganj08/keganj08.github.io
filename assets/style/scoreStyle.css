@@ -69,7 +69,6 @@ div {
 }
 
 .scoreButton .moveIcon {
-    grid-area: moveIcon;
     margin-left: 15px;
     justify-self: center;
 }
@@ -77,6 +76,7 @@ div {
 .scoreButton {
     display: flex;
     align-items: center;
+    justify-content: center;
     background-color: rgb(248, 248, 248);
     margin: 0 9px 0 9px;
     border-radius: 1vh;
@@ -88,11 +88,8 @@ div {
 
 #draggableScoreModifier {
     width: 120px;
-    display: grid;
-    grid-template-columns: 80% 20%;
-    grid-template-rows: 1fr;
-    grid-template-areas:
-        "input moveIcon";
+    display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     border: 2px solid black;
@@ -103,13 +100,11 @@ div {
     display: flex;
     justify-self: center;
     align-self: center;
-    grid-area: input;
     height: 100%;
 }
 
 #draggableScoreModifier:hover {
     cursor: grab;
-    background-color: rgb(200,200,200);
 }
 
 .scoreButtonDivider {
@@ -118,11 +113,8 @@ div {
     margin: 0 25px;
 }
 
-.scoreButton input[type="number"] {
-}
-
 .scoreModifier {
-    padding: max(2px, 2vh);
+    padding: 15px;
     cursor: default
 }
 
@@ -170,10 +162,7 @@ input {
     margin: 25px 0;
 }
 
-#newPlayerButton, .removePlayerButton {
-    height: 25px;
-    width: 25px;
-    border-radius: 10px;
+#newPlayerButton, .removePlayerButton, .selectPlayerButton {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -181,9 +170,16 @@ input {
     font-weight: bold;
     position: relative;
     bottom: 2px;
-    border: 3px solid black;
-    background-color: black;
-    color: white;
+    border: 2px solid black;
+
+}
+
+#newPlayerButton, .removePlayerButton {
+    height: 25px;
+    width: 25px;
+    background-color: white;
+    color: black;
+    border-radius: 10px;
 }
 
 #newPlayerButton {
@@ -193,8 +189,8 @@ input {
 }
 
 #newPlayerButton:hover, .removePlayerButton:hover {
-    background-color: white;
-    color: black;
+    background-color: black;
+    color: white;
     cursor: pointer;
 }
 
@@ -205,6 +201,7 @@ input {
 .removePlayerButton {
     grid-area: removeBtn;
     font-size: 12px;
+    margin-left: 2vw;
 }
 
 *.unselectable {
@@ -225,13 +222,13 @@ input {
     margin-left: 200px;
     transition: top 0.5s, margin-left 0.35s, width 0.2s;
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: auto 1fr auto;
     grid-template-rows: 1fr;
     grid-template-areas:
-        "player removeBtn";
-    grid-column-gap: 20px;
-    justify-content: center;
-    align-items:center; 
+        "selectBtn player removeBtn";
+    grid-column-gap: 0;
+    justify-items: right;
+    align-items: center; 
     position: absolute;
  }
 
@@ -247,18 +244,69 @@ input {
     width: 100%;
     min-width: 400px;
     background-color:rgb(230, 230, 230);
-    border: 3px solid black;
+    border: 2px solid black;
     align-items: center;
     justify-content: center;
     border-radius: 10px;
     overflow: hidden;
 }
 
+.selectablePlayer .player * {
+    pointer-events: none;
+}
+
+/* Highlighting the hovered player while in select mode 
+
+.selectablePlayer:hover .player::before {
+    border: 1px solid red;
+    top: 0;
+    right: 0;
+    content: "";
+    width: 100%;
+    height: 100%;
+    z-index: 800;
+    position: absolute;
+    background-color: rgba(255,255,255,0.3);
+}
+*/
+
 .highlightedPlayer {
-    box-shadow: 0 0 0 100vmax rgba(0,0,0,0.3);
+    box-shadow: 0 0 0 1000vmax rgba(0,0,0,0.3);
     z-index: 700;
 }
 
+.selectablePlayer .player:hover, .selectablePlayer .selectPlayerButton:hover {
+    cursor: pointer;
+}
+
+.selectablePlayer.selected .selectPlayerButton, .selectablePlayer:hover .selectPlayerButton, .selectPlayerButton:hover {
+    background-color: black;
+}
+
+.selectPlayerButton {
+    grid-area: selectBtn;
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    margin-right: 2vw;
+}
+
+.removePlayerButton, .selectPlayerButton {
+    transition: margin 0.3s, height 0.3s, width 0.3s, opacity 0.3s, visibility 0.3s, background-color 0.3s;
+}
+
+.hiddenBtn {
+    height: 0;
+    width: 0;
+    opacity: 0;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.selectablePlayer:hover .deadPlayer {
+    cursor: default;
+    border-width: 2px;
+}
 
 @media only screen and (max-width: 1000px){
     #scoresBox {
@@ -315,12 +363,22 @@ input {
 .updateScoreButton {
     min-width: 55px;
     overflow: hidden;
+    transition: opacity 0.3s;
+}
+
+.deadPlayer .updateScoreButton {
+    opacity: 0;
 }
 
 .deadPlayer .updateScoreButton:hover {
     cursor: default;
     background-color:rgb(248, 248, 248);
-    color:rgb(101, 82, 112);
+}
+
+.deadPlayer .playerScore {
+    color:rgb(101, 82, 112); 
+    border-bottom-color: rgb(101, 82, 112);
+    border-bottom: none;
 }
 
 .addMinionButton {
@@ -347,11 +405,11 @@ input {
     min-height: 40px;
 }
 
-.addMinionButton:hover, .updateScoreButton:hover {
+.addMinionButton:hover, .updateScoreButton:hover, #scoreModifierMulti:hover {
     background-color: lightgray;
 }
 
-.player div:hover {
+.player div:hover, #scoreModifierMulti:hover {
     cursor: pointer;
 }
 
@@ -362,6 +420,7 @@ input {
     font-size: 21px;
     max-width: 72px;
     justify-self: right;
+    transition: border 0.3s, color 0.3s;
 }
 
 /* Chrome, Safari, Edge, Opera */

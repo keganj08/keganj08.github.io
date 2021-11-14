@@ -1,23 +1,4 @@
-/*let scoreModInputs = document.getElementsByClassName("scoreModInput");
-for(var i=0; i<scoreModInputs.length; i++){
-    alert(i);
-
-    scoreModInputs[i].addEventListener("keydown", function(event){
-        if(event.which == 13){
-            let idStr = "scoreModVal" + (i+1);
-            alert(idStr);
-            let val = document.getElementById(idStr).value;
-            alert(val);
-            let updateScoreButtons = document.getElementsByClassName("updateScoreButton1");
-            if(val>-1){
-                val = "+" + val;
-            }
-            for(var j=0; j<updateScoreButtons.length; j++){
-                updateScoreButtons[j].innerHTML = val;
-            }
-        }
-    });
-}*/
+var selectMode = false;
 
 document.getElementById("newPlayerButton").addEventListener("click", function() {
     //Add a new player to the scoreboard, then create a player div with a corresponding id
@@ -72,12 +53,58 @@ document.getElementById("scoreModVal4").addEventListener("blur", function() {
     }
 });
 
-function givePlayerEventListeners(playerEl) {
+document.getElementById("scoreModifierMulti").addEventListener("click", function(){
+    if(Scoreboard.players.length > 0){
+        if(selectMode){
+            removeSelectButtons();
+            selectMode = false;
+        } else {
+            addSelectButtons();
+            selectMode = true;
+        }
+    }
+});
 
+$("#scoreModifierMulti").droppable({
+    over: function() {
+        if(selectMode){
+            this.classList.add("highlightedPlayer");
+        }
+    },
+
+    
+    out: function() {
+        if(selectMode){
+            this.classList.remove("highlightedPlayer");
+        }
+    },
+
+    drop: function(event, ui){
+        this.classList.remove("highlightedPlayer");
+        if(Scoreboard.players.length > 0){
+            if(selectMode){
+                let selectedPlayers = document.getElementsByClassName("selected");
+                let pids = [];
+                for(var i=0; i<selectedPlayers.length; i++){
+                    pids.push(selectedPlayers[i].querySelector(".player").id.split("player")[1]);
+                }
+                let amt = $(ui.draggable).find(".scoreModInput").val();
+                Scoreboard.updatePlayersScores(pids, amt);
+                Scoreboard.updateRanking();
+                updatePlayerDivs();
+                selectMode = false;
+                removeSelectButtons();
+            }
+        }
+    }
+});
+
+function givePlayerEventListeners(playerEl) {
     $(playerEl).droppable({
         over: function(){
             if(Scoreboard.isPlayerAlive(this.id.split("player")[1])){
                 this.classList.add("highlightedPlayer");
+                $("#draggableScoreModifier").removeClass("highlightedPlayer");
             }
         },
 
@@ -92,7 +119,6 @@ function givePlayerEventListeners(playerEl) {
                 let amt = $(ui.draggable).find(".scoreModInput").val();
                 let newScore = parseInt(score) + parseInt(amt);
                 let pid = this.id.split("player")[1];
-                updateScoreDiv(pid, newScore);
                 Scoreboard.updatePlayerScore(pid, newScore);
                 Scoreboard.updateRanking();
                 updatePlayerDivs();
@@ -113,7 +139,7 @@ function givePlayerEventListeners(playerEl) {
     playerEl.querySelector(".playerScore").addEventListener("blur", function(){
         let pid = playerEl.id.split("player")[1];
         let score = playerEl.querySelector(".playerScore").value;
-        Scoreboard.updatePlayerScore(pid, score);
+        Scoreboard.setPlayerScore(pid, score);
         Scoreboard.updateRanking();
         updatePlayerDivs();
     });
@@ -123,7 +149,7 @@ function givePlayerEventListeners(playerEl) {
         if(event.which == 13){
             let pid = playerEl.id.split("player")[1];
             let score = playerEl.querySelector(".playerScore").value;
-            Scoreboard.updatePlayerScore(pid, score);
+            Scoreboard.setPlayerScore(pid, score);
             Scoreboard.updateRanking();
             updatePlayerDivs();
             this.blur();
@@ -152,8 +178,10 @@ function givePlayerEventListeners(playerEl) {
         let pid = playerEl.id.split("player")[1];
         if(Scoreboard.isPlayerAlive(pid)){
             playerEl.classList.add("deadPlayer");
+            playerEl.querySelector(".playerScore").readOnly = true;
         } else {
             playerEl.classList.remove("deadPlayer");
+            playerEl.querySelector(".playerScore").readOnly = false;
         }
         Scoreboard.togglePlayerIsAlive(pid);
         updatePlayerFlagDivs(pid);
@@ -163,6 +191,8 @@ function givePlayerEventListeners(playerEl) {
     playerEl.querySelector(".playerFlag").addEventListener("click", function(){
         let pid = playerEl.id.split("player")[1];
         Scoreboard.togglePlayerIsPlayer(pid);
+        playerEl.classList.remove("deadPlayer");
+        playerEl.querySelector(".playerScore").readOnly = false;
         updatePlayerFlagDivs(pid);
     });
 
@@ -170,11 +200,8 @@ function givePlayerEventListeners(playerEl) {
     playerEl.querySelector(".updateScoreButton1").addEventListener("click", function(){
         let pid = playerEl.id.split("player")[1];
         if(Scoreboard.isPlayerAlive(pid)){
-            let score = playerEl.querySelector(".playerScore").value;
             let amt = playerEl.querySelector(".updateScoreButton1").innerHTML.replace("+", "");
-            newScore = parseInt(score) + parseInt(amt);
-            updateScoreDiv(pid, newScore);
-            Scoreboard.updatePlayerScore(pid, newScore);
+            Scoreboard.updatePlayerScore(pid, amt);
             Scoreboard.updateRanking();
             updatePlayerDivs();
         }
@@ -184,11 +211,8 @@ function givePlayerEventListeners(playerEl) {
     playerEl.querySelector(".updateScoreButton2").addEventListener("click", function(){
         let pid = playerEl.id.split("player")[1];
         if(Scoreboard.isPlayerAlive(pid)){
-            let score = playerEl.querySelector(".playerScore").value;
             let amt = playerEl.querySelector(".updateScoreButton2").innerHTML.replace("+", "");
-            newScore = parseInt(score) + parseInt(amt);
-            updateScoreDiv(pid, newScore);
-            Scoreboard.updatePlayerScore(pid, parseInt(score)+parseInt(amt));
+            Scoreboard.updatePlayerScore(pid, amt);
             Scoreboard.updateRanking();
             updatePlayerDivs();
         }
@@ -198,11 +222,8 @@ function givePlayerEventListeners(playerEl) {
     playerEl.querySelector(".updateScoreButton3").addEventListener("click", function(){
         let pid = playerEl.id.split("player")[1];
         if(Scoreboard.isPlayerAlive(pid)){
-            let score = playerEl.querySelector(".playerScore").value;
             let amt = playerEl.querySelector(".updateScoreButton3").innerHTML.replace("+", "");
-            newScore = parseInt(score) + parseInt(amt);
-            updateScoreDiv(pid, newScore);
-            Scoreboard.updatePlayerScore(pid, newScore);
+            Scoreboard.updatePlayerScore(pid, amt);
             Scoreboard.updateRanking();
             updatePlayerDivs();
         }
@@ -212,13 +233,29 @@ function givePlayerEventListeners(playerEl) {
     playerEl.querySelector(".updateScoreButton4").addEventListener("click", function(){
         let pid = playerEl.id.split("player")[1];
         if(Scoreboard.isPlayerAlive(pid)){
-            let score = playerEl.querySelector(".playerScore").value;
             let amt = playerEl.querySelector(".updateScoreButton4").innerHTML.replace("+", "");
-            newScore = parseInt(score) + parseInt(amt);
-            updateScoreDiv(pid, newScore);
-            Scoreboard.updatePlayerScore(pid, newScore);
+            Scoreboard.updatePlayerScore(pid, amt);
             Scoreboard.updateRanking();
             updatePlayerDivs();
+        }
+    });
+}
+
+function giveSelectButtonListeners(buttonEl) {
+    
+    //let bid = $(buttonEl).parent().find(".player").attr("id").split("player")[1];
+    
+
+    buttonEl.parentElement.querySelector(".player").addEventListener("click", function(){
+        if(selectMode && !$(this).hasClass("deadPlayer")){
+            toggleDivSelected($(buttonEl).parent());
+        }
+    });
+
+
+    buttonEl.addEventListener("click", function(){
+        if(selectMode && !$(this).parent().find(".player").hasClass("deadPlayer")){
+            toggleDivSelected($(buttonEl).parent());
         }
     });
 }

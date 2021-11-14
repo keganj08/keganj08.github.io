@@ -143,12 +143,17 @@ function addPlayerDiv(pid, rank, pName=null, isAlive="true", isPlayer="true") {
     updateScoreBtn4.classList.add("updateScoreButton", "updateScoreButton4", "unselectable");
     newPlayer.append(updateScoreBtn4);
 
-
     let score = document.createElement("input");
     score.classList.add("playerScore", "numeric");
     score.type = "number";
     score.value = "0";
     newPlayer.append(score);
+
+    let newSelectButton = document.createElement("div");
+    newSelectButton.classList.add("selectPlayerButton", "unselectable", "hiddenBtn");
+    newPlayerWrapper.append(newSelectButton);
+    giveSelectButtonListeners(newSelectButton);
+
 
     givePlayerEventListeners(newPlayer);
     return newPlayerWrapper;
@@ -167,5 +172,58 @@ function updatePlayerDivs() {
             newPlayer.querySelector(".player").querySelector(".playerScore").value = Scoreboard.players[i].score;
             */
         }
+    }
+}
+
+//Adds a select button to all players
+function addSelectButtons() {
+    let playerIds = Scoreboard.getPids();
+    for(var i=0; i<playerIds.length; i++){
+        let idStr = "#player" + playerIds[i];
+        $(idStr).parent().addClass("selectablePlayer");
+        $(idStr).parent().find(".removePlayerButton").addClass("hiddenBtn");
+        if(!$(idStr).hasClass("deadPlayer")){
+            $(idStr).parent().find(".selectPlayerButton").removeClass("hiddenBtn");
+        } else {
+            $(idStr).parent().find(".selectPlayerButton").addClass("hiddenBtn");        
+        }
+        /*
+        let newSelectButton = document.createElement("div");
+        newSelectButton.classList.add("selectPlayerButton", "unselectable");
+        $(idStr).parent().prepend(newSelectButton);
+        $(idStr).parent().addClass("selectablePlayer");
+        if(!$(idStr).hasClass("deadPlayer")){
+            giveSelectButtonListeners(newSelectButton);
+        } else {
+            $(newSelectButton).css("opacity", "0");
+        }
+        */
+    }
+}
+
+function removeSelectButtons() {
+    /*
+    let selectButtons = document.getElementsByClassName("selectPlayerButton");
+    while(selectButtons.length > 0){
+        selectButtons[0].remove();
+    }*/
+
+    let playerIds = Scoreboard.getPids();
+    for(var i=0; i<playerIds.length; i++){
+        let idStr = "#player" + playerIds[i];
+        $(idStr).parent().removeClass("selectablePlayer");
+        $(idStr).parent().removeClass("selected");
+        $(idStr).parent().find(".selectPlayerButton").addClass("hiddenBtn");
+        $(idStr).parent().find(".removePlayerButton").removeClass("hiddenBtn");
+    }
+}
+
+
+//Toggle a player wrapper div selected or unselected
+function toggleDivSelected(playerWrapperEl) {
+    if($(playerWrapperEl).hasClass("selected")){
+        $(playerWrapperEl).removeClass("selected");
+    } else {
+        $(playerWrapperEl).addClass("selected");
     }
 }
