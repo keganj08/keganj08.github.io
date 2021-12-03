@@ -1,5 +1,9 @@
 var selectMode = false;
 
+window.addEventListener("resize", function(){
+    updatePlayerDivs();
+});
+
 document.getElementById("newPlayerButton").addEventListener("click", function() {
     //Add a new player to the scoreboard, then create a player div with a corresponding id
     let newPlayerPid = Scoreboard.addNewPlayer();
@@ -111,10 +115,8 @@ $("#scoreModifierMulti").droppable({
 function givePlayerEventListeners(playerEl) {
     $(playerEl).droppable({
         over: function(){
-            if(Scoreboard.isPlayerAlive(this.id.split("player")[1])){
-                this.classList.add("highlightedPlayer");
-                $("#draggableScoreModifier").removeClass("highlightedPlayer");
-            }
+            this.classList.add("highlightedPlayer");
+            $("#draggableScoreModifier").removeClass("highlightedPlayer");
         },
 
         out: function() {
@@ -122,17 +124,15 @@ function givePlayerEventListeners(playerEl) {
         },
 
         drop: function(event, ui){
-            if(Scoreboard.isPlayerAlive(this.id.split("player")[1])){
-                this.classList.remove("highlightedPlayer");
-                let amt = $(ui.draggable).find(".scoreModInput").val();
-                if(selectMode){
-                    updateSelectedScores(amt);
-                } else { 
-                    let pid = this.id.split("player")[1];
-                    Scoreboard.updatePlayerScore(pid, amt);
-                    Scoreboard.updateRanking();
-                    updatePlayerDivs();
-                }
+            this.classList.remove("highlightedPlayer");
+            let amt = $(ui.draggable).find(".scoreModInput").val();
+            if(selectMode){
+                updateSelectedScores(amt);
+            } else { 
+                let pid = this.id.split("player")[1];
+                Scoreboard.updatePlayerScore(pid, amt);
+                Scoreboard.updateRanking();
+                updatePlayerDivs();
             }
         }
     });
@@ -197,6 +197,8 @@ function givePlayerEventListeners(playerEl) {
             }
             Scoreboard.togglePlayerIsAlive(pid);
             updatePlayerFlagDivs(pid);
+            Scoreboard.updateRanking();
+            updatePlayerDivs();
         }
     });
 
@@ -212,52 +214,45 @@ function givePlayerEventListeners(playerEl) {
         } else {
             playerEl.classList.add("npcPlayer");
         }
-
         updatePlayerFlagDivs(pid);
+        Scoreboard.updateRanking();
+        updatePlayerDivs();
     });
 
     //Update score button 1 clicked listener
     playerEl.querySelector(".updateScoreButton1").addEventListener("click", function(){
         let pid = playerEl.id.split("player")[1];
-        if(Scoreboard.isPlayerAlive(pid)){
-            let amt = playerEl.querySelector(".updateScoreButton1").innerHTML.replace("+", "");
-            Scoreboard.updatePlayerScore(pid, amt);
-            Scoreboard.updateRanking();
-            updatePlayerDivs();
-        }
+        let amt = playerEl.querySelector(".updateScoreButton1").innerHTML.replace("+", "");
+        Scoreboard.updatePlayerScore(pid, amt);
+        Scoreboard.updateRanking();
+        updatePlayerDivs();
     });
 
     //Update score button 2 clicked listener
     playerEl.querySelector(".updateScoreButton2").addEventListener("click", function(){
         let pid = playerEl.id.split("player")[1];
-        if(Scoreboard.isPlayerAlive(pid)){
-            let amt = playerEl.querySelector(".updateScoreButton2").innerHTML.replace("+", "");
-            Scoreboard.updatePlayerScore(pid, amt);
-            Scoreboard.updateRanking();
-            updatePlayerDivs();
-        }
+        let amt = playerEl.querySelector(".updateScoreButton2").innerHTML.replace("+", "");
+        Scoreboard.updatePlayerScore(pid, amt);
+        Scoreboard.updateRanking();
+        updatePlayerDivs();
     });
 
     //Update score button 3 clicked listener
     playerEl.querySelector(".updateScoreButton3").addEventListener("click", function(){
         let pid = playerEl.id.split("player")[1];
-        if(Scoreboard.isPlayerAlive(pid)){
-            let amt = playerEl.querySelector(".updateScoreButton3").innerHTML.replace("+", "");
-            Scoreboard.updatePlayerScore(pid, amt);
-            Scoreboard.updateRanking();
-            updatePlayerDivs();
-        }
+        let amt = playerEl.querySelector(".updateScoreButton3").innerHTML.replace("+", "");
+        Scoreboard.updatePlayerScore(pid, amt);
+        Scoreboard.updateRanking();
+        updatePlayerDivs();
     });
 
     //Update score button 4 clicked listener
     playerEl.querySelector(".updateScoreButton4").addEventListener("click", function(){
         let pid = playerEl.id.split("player")[1];
-        if(Scoreboard.isPlayerAlive(pid)){
-            let amt = playerEl.querySelector(".updateScoreButton4").innerHTML.replace("+", "");
-            Scoreboard.updatePlayerScore(pid, amt);
-            Scoreboard.updateRanking();
-            updatePlayerDivs();
-        }
+        let amt = playerEl.querySelector(".updateScoreButton4").innerHTML.replace("+", "");
+        Scoreboard.updatePlayerScore(pid, amt);
+        Scoreboard.updateRanking();
+        updatePlayerDivs();
     });
 }
 

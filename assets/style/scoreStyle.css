@@ -130,6 +130,7 @@ div {
     justify-content: center;
     position: relative;
     z-index: 9000;
+    font-size: max(18px, 1.2vw);
 }
 
 #draggableScoreModifier input {
@@ -137,6 +138,8 @@ div {
     justify-self: center;
     align-self: center;
     height: 100%;
+    font-size: max(18px, 1.2vw);
+    border-radius: 0;
 }
 
 #draggableScoreModifier:hover {
@@ -157,6 +160,7 @@ div {
 input {
     background: none;
     border: none;
+    border-radius: 0;
     border-bottom: 2px solid black;
     font-family: "Open Sans", sans-serif;
 }
@@ -283,11 +287,23 @@ input {
     padding: 11px 20px;
     width: 100%;
     min-width: 400px;
-    background-color:rgb(230, 230, 230);
+    background: linear-gradient(to right, rgb(230, 230, 230) 80%, rgb(180,180,180));
+    /*background-color: rgb(230,230,230);*/
+    background-size: 200% 100%;
+    background-position: left bottom;
     align-items: center;
     justify-content: center;
     border-radius: 10px;
     overflow: hidden;
+    transition: background-position 300ms ease, background-color 300ms ease;
+}
+
+.changingScore {
+    /*background-position: right bottom;*/
+}
+
+.changingScore .playerScore {
+    color: red;
 }
 
 /*
@@ -319,7 +335,11 @@ input {
 }
 */
 
-.highlightedPlayer {
+.selectablePlayer .player:hover {
+    box-shadow: 0 0 3px black;
+}
+
+.highlightedPlayer{
     position: relative;
     box-shadow: 0 0 0 1000vmax rgba(0,0,0,0.3);
     z-index: 600;
@@ -391,7 +411,7 @@ input {
 .aliveFlag, .playerFlag {
     font-size: 14px;
     font-weight: bold;
-    width: 60px;
+    width: 70px;
 }
 
 .aliveFlag, .playerFlag, .addMinionButton, .updateScoreButton {
@@ -421,24 +441,24 @@ input {
     transition: opacity 0.3s;
 }
 
+/*
 .deadPlayer .updateScoreButton {
     opacity: 0;
 }
+
 
 .deadPlayer .updateScoreButton:hover {
     cursor: default;
     background-color:rgb(248, 248, 248);
 }
 
+
 .deadPlayer .playerScore{
     color:rgb(101, 82, 112); 
     border-bottom-color: rgb(101, 82, 112);
-    border-bottom: none;
 }
+*/
 
-.addMinionButton {
-    grid-area: addMinionBtn;
-}
 
 .updateScoreButton1 {
     grid-area: updateScoreBtn1;
@@ -456,11 +476,11 @@ input {
     grid-area: updateScoreBtn4;
 }
 
-.addMinionButton, .updateScoreButton {
+.updateScoreButton {
     min-height: 40px;
 }
 
-.addMinionButton:hover, .updateScoreButton:hover, #scoreModifierMulti:hover {
+.updateScoreButton:hover, #scoreModifierMulti:hover {
     background-color: lightgray;
 }
 

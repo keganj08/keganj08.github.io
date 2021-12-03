@@ -62,7 +62,7 @@ function updatePlayerFlagDivs(pid){
         player.querySelector(".playerFlag").innerHTML = "PLAYER";
         player.querySelector(".playerFlag").classList.remove("npc");
     } else {
-        player.querySelector(".playerFlag").innerHTML = "NPC";
+        player.querySelector(".playerFlag").innerHTML = "MINION";
         player.querySelector(".playerFlag").classList.add("npc");
     }
 }
@@ -80,6 +80,7 @@ function addPlayerDiv(pid, rank, pName=null, isAlive="true", isPlayer="true") {
     newPlayer.classList.add("player");
     let idStr = "player" + pid;
     newPlayer.id = idStr;
+    $(newPlayer).data('changeLevel', 0);
     newPlayerWrapper.append(newPlayer);
 
     let remPlayerBtn = document.createElement("div");
@@ -93,7 +94,7 @@ function addPlayerDiv(pid, rank, pName=null, isAlive="true", isPlayer="true") {
     if(pName){
         name.value = pName;
     } else {
-        name.value = "player " + pid;
+        name.value = "Player " + String(pid+1);
     }
     newPlayer.append(name);
 
@@ -169,6 +170,7 @@ function addPlayerDiv(pid, rank, pName=null, isAlive="true", isPlayer="true") {
     giveSelectButtonListeners(newSelectButton);
 
     givePlayerEventListeners(newPlayer);
+    name.select();
     return newPlayerWrapper;
 }
 
@@ -225,4 +227,15 @@ function toggleDivSelected(playerWrapperEl) {
     } else {
         $(playerWrapperEl).addClass("selected");
     }
+}
+
+function animateScoreChange(pid) {
+    $(pid).data('changeLevel', $(pid).data('changeLevel')+1);
+    $(pid).addClass('changingScore');
+    setTimeout(() => {
+        $(pid).data('changeLevel', $(pid).data('changeLevel')-1)
+        if($(pid).data('changeLevel') < 1){
+            $(pid).removeClass('changingScore');
+        }
+    }, 650);
 }

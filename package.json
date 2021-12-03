@@ -1,0 +1,9 @@
+{
+    "name": "blank-white-cards",
+    "version": "0.0.1",
+    "description": "a multiplayer blank white cards game engine",
+    "dependencies": {
+        "socket.io": "^4.4.0",
+        "url": "^0.11.0"
+    }
+}

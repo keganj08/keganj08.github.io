@@ -4,6 +4,7 @@ var player = {
     score: 0,
     isAlive: true,
     isPlayer: true,
+    rank: -1,
 
     initialize: function() {
         this.pid = 0;
@@ -11,6 +12,7 @@ var player = {
         this.isAlive = true;
         this.isPlayer = true;
         this.score = 0;
+        this.rank = -1;
     },
 
     setScore: function(score) {this.score = score;},
@@ -84,8 +86,10 @@ var ranking = {
         if(!player.isPlayer && player.score <= 0){
             this.removePlayer(player);
             removePlayerDiv(pid);
+        } else {
+            updateScoreDiv(pid, player.score);
         }
-        updateScoreDiv(pid, player.score);
+        animateScoreChange('#player' + pid);
     },
 
     updatePlayerScore: function(pid, score){
@@ -97,6 +101,7 @@ var ranking = {
         } else { 
             updateScoreDiv(pid, player.score);
         }
+        animateScoreChange('#player' + pid);
     },
 
     updatePlayersScores: function(pids, score){
@@ -174,6 +179,11 @@ var ranking = {
         //Sorts the players from highest to lowest score
         newRanking = [];
         this.printPlayers();
+        //Prioritizes NPCs over players in the ranking
+        for(var i=0; i<this.players.length; i++){
+            if(!this.players[i].isPlayer){this.players[i].score += 99999999;}
+            if(!this.players[i].isAlive){this.players[i].score -= 99999999;}
+        }
         while(this.players.length > 0){
             currentLeader = this.players[0];
             console.log("  testing " + currentLeader.score)
@@ -181,15 +191,18 @@ var ranking = {
                 console.log("    " + currentLeader.score + " vs " + this.players[i].score);
                 if(parseInt(this.players[i].score) > parseInt(currentLeader.score)){
                     currentLeader = this.players[i];
-                }
+                }  
                 console.log("    currentLeader: " + currentLeader.score)
             }
             console.log("  " + currentLeader.score + " was highest");
             newRanking.push(currentLeader);
             this.removePlayer(currentLeader);
         }
-
         this.players = newRanking;
+        for(var i=0; i<this.players.length; i++){
+            if(!this.players[i].isPlayer){this.players[i].score -= 99999999;}
+            if(!this.players[i].isAlive){this.players[i].score += 99999999;}
+        }
         this.printPlayers();
     },
 

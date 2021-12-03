@@ -1,26 +1,19 @@
-document.addEventListener("keydown", function(event){
-    if(event.which == 13){ //enter key pressed
-        validateGameId();
-    }
+document.getElementById('startGame').addEventListener('click', function(){
+    socket.emit('start game');
 });
 
-function leaveRoom(){
-    var myEl = document.getElementById("output");
-    let username = getUsername();
-    let gameId = getGameId();
-
-    let xhr = new XMLHttpRequest();
-    xhr.open('POST', `http://127.0.0.1:3000`);
-    xhr.send(`username=${username}&gameId=${gameId}&leaving=true`);
-}
-
-window.addEventListener("beforeunload", function(event){
-    event.preventDefault();
-    leaveRoom();
-});
-
-window.addEventListener("popstate", function(event){
-    event.preventDefault();
-    this.alert("hey!");
-    leaveRoom();
+document.getElementById('takeTurn').addEventListener('click', function(e){
+    var promise = isMyTurn();
+    promise.then(
+        function(myTurn){
+            if(myTurn == true){
+                //It is this player's turn
+                socket.emit('take turn');
+            } else {
+                //It is not this player's turn
+                alert('Put that back, it isn\'t yours to take!');
+            }
+        },
+        function(error){ console.error('Error during turn checking: ' + error); }
+    );
 });
